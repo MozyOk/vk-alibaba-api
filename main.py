@@ -82,4 +82,7 @@ def get_by_categories():
   json_data = json.dumps(items, ensure_ascii=False, indent=2)
   return json_data  
 
-run(host='localhost', port=8080, debug=True)
+if os.environ.get('APP_LOCATION') == 'heroku':
+    run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+else:
+    run(host='localhost', port=8080, debug=True)
